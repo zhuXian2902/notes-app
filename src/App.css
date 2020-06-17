@@ -1,38 +1,231 @@
-.App {
-  text-align: center;
+/** @format */
+#root {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	overflow-x: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: 600px;
+	margin: 10px auto;
+	background-color: #f7f7f7;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	background-color: #2980b9;
+	color: white;
+	text-transform: uppercase;
+	font-weight: normal;
+	margin: 0 0 10px 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+	background-color: #2980b9;
+	color: white;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	font-size: 24px;
+	font-weight: normal;
+	margin: 0;
+	display: flex;
+	justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+	font-size: 18px;
+	background-color: #c2bdbd;
+	width: 90%;
+	padding: 13px 13px 13px 20px;
+	box-sizing: border-box;
+	color: #2980b9;
+	border: rgba(128, 91, 91, 0);
+	margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input:focus {
+	background-color: white;
+	border: 3px solid #2980b9;
+	outline: none;
+}
+
+textarea {
+	font-size: 18px;
+	background-color: #c2bdbd;
+	width: 90%;
+	padding: 13px 13px 13px 20px;
+	box-sizing: border-box;
+	color: #2980b9;
+	border: rgba(128, 91, 91, 0);
+	margin-bottom: 20px;
+}
+
+textarea:focus {
+	background-color: white;
+	border: 3px solid #2980b9;
+	outline: none;
+}
+
+.desc {
+	font-size: 18px;
+	background-color: #998f8f;
+	width: 90%;
+	padding: 13px 13px 13px 20px;
+	box-sizing: border-box;
+	color: #feffff;
+	border: rgba(128, 91, 91, 0);
+	margin-bottom: 20px;
+}
+
+h2 {
+	background-color: #323538;
+	color: white;
+	font-size: 24px;
+	font-weight: normal;
+	margin: 0 0 10px 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+button {
+	text-decoration: none;
+	font-size: 30px;
+	color: white;
+	background-color: #7f9db1;
+	border: none;
+	padding: 10px 10px;
+	position: relative;
+	box-shadow: 0px 6px #1192e9;
+	border-radius: 10px;
+	align-self: centre;
+	margin-bottom: 1rem;
+}
+button:hover {
+	box-shadow: 0 4px #2980b9;
+	border: none;
+	top: 2px;
+}
+button:active {
+	box-shadow: 0 0 #2980b9;
+	top: 6px;
+	border: none;
+}
+/************
+/*
+.button1 {
+	text-decoration: none;
+	font-size: 15px;
+	width: 70px;
+	color: white;
+	background-color: #2a5077;
+	border: none;
+	padding: 5px 5px;
+	position: relative;
+	box-shadow: 0px 6px #1192e9;
+	border-radius: 5px;
+	align-self: centre;
+	display: flex;
+	flex-direction: row;
+	margin: 1rem 5px;
+	text-transform: uppercase;
+}
+.button1:hover {
+	box-shadow: 0 4px #2980b9;
+	border: none;
+	top: 2px;
+}
+.button1:active {
+	box-shadow: 0 0 #2980b9;
+	top: 6px;
+	border: none;
+}
+
+.notes {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+ .note {
+	max-height: 200px;
+   max-width: 250px; 
+	border: 1px solid #ccc;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 10px 10px;
+	background-color: #323538;
+} */
+
+.btn {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+@media screen and (min-width: 400px) {
+	.container {
+		min-width: 400px;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.container {
+		min-width: 600px;
+	}
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+span {
+	background-color: #3c9ae7;
+	height: 40px;
+	margin-right: 20px;
+	text-align: center;
+	color: rgb(63, 62, 62);
+	width: 0px;
+	display: inline-flex;
+	transition: 0.5s all;
+	opacity: 0;
+	display: flex;
+}
+
+i {
+	padding: 10px;
+	border-right: 1px solid #000;
+}
+
+li:hover span {
+	width: 112px;
+	opacity: 1;
+}
+
+li {
+	background-color: rgb(128, 124, 124);
+	height: 40px;
+	line-height: 40px;
+	color: rgb(247, 244, 244);
+	display: flex;
+}
+
+li:nth-child(2n) {
+	background-color: #797474;
 }
