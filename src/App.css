@@ -18,6 +18,25 @@
 	background-color: #f7f7f7;
 }
 
+.modal {
+	margin: 0;
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	bottom: 40px;
+	right: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(102, 241, 209);
+	background: radial-gradient(
+		circle,
+		rgba(102, 241, 209, 0.8323704481792717) 23%,
+		rgba(75, 215, 101, 0.9023984593837535) 98%
+	);
+	flex-direction: column;
+}
+
 .header {
 	display: flex;
 	justify-content: center;
@@ -27,7 +46,9 @@
 	color: white;
 	text-transform: uppercase;
 	font-weight: normal;
-	margin: 0 0 10px 0;
+	margin: 0 0 0px 0;
+	position: relative;
+	border: 2px solid rgb(73, 73, 72);
 }
 
 h1 {
@@ -42,15 +63,25 @@ h1 {
 	justify-content: center;
 }
 
+.fa-plus {
+	border: 2px solid white;
+	position: absolute;
+	left: 0;
+	top: 2px;
+	border-radius: 50%;
+	background-color: black;
+}
+
 input {
 	font-size: 18px;
-	background-color: #c2bdbd;
+	background-color: #f3ebeb;
 	width: 90%;
 	padding: 13px 13px 13px 20px;
-	box-sizing: border-box;
 	color: #2980b9;
 	border: rgba(128, 91, 91, 0);
 	margin-bottom: 20px;
+	margin-top: 10px;
+	border: 3px solid #2980b9;
 }
 
 input:focus {
@@ -61,13 +92,14 @@ input:focus {
 
 textarea {
 	font-size: 18px;
-	background-color: #c2bdbd;
+	background-color: #f3ebeb;
 	width: 90%;
 	padding: 13px 13px 13px 20px;
-	box-sizing: border-box;
 	color: #2980b9;
 	border: rgba(128, 91, 91, 0);
 	margin-bottom: 20px;
+	height: 200px;
+	border: 3px solid #2980b9;
 }
 
 textarea:focus {
@@ -78,22 +110,26 @@ textarea:focus {
 
 .desc {
 	font-size: 18px;
-	background-color: #998f8f;
+	background-color: white;
+	border: 3px solid #2980b9;
+	outline: none;
 	width: 90%;
+	min-height: 270px;
 	padding: 13px 13px 13px 20px;
-	box-sizing: border-box;
-	color: #feffff;
-	border: rgba(128, 91, 91, 0);
+	color: #2980b9;
 	margin-bottom: 20px;
 }
 
 h2 {
-	background-color: #323538;
+	position: relative;
+	background-color: #3873af;
 	color: white;
-	font-size: 24px;
+	font-size: 30px;
+	padding: 10px 20px;
 	font-weight: normal;
 	margin: 0 0 10px 0;
 	width: 100%;
+	top: -50px;
 	display: flex;
 	justify-content: center;
 }
@@ -176,6 +212,18 @@ button:active {
 	align-items: flex-end;
 }
 
+@media screen and (min-width: 250px) {
+	.container {
+		min-width: 250px;
+	}
+}
+
+@media screen and (min-width: 300px) {
+	.container {
+		min-width: 300px;
+	}
+}
+
 @media screen and (min-width: 400px) {
 	.container {
 		min-width: 400px;
@@ -188,6 +236,12 @@ button:active {
 	}
 }
 
+@media screen and (min-width: 900px) {
+	.container {
+		min-width: 900px;
+	}
+}
+
 ul {
 	list-style: none;
 	margin: 0;
@@ -196,7 +250,7 @@ ul {
 }
 
 span {
-	background-color: #3c9ae7;
+	background-color: #e0e5e9;
 	height: 40px;
 	margin-right: 20px;
 	text-align: center;

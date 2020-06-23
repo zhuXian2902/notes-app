@@ -2,9 +2,12 @@
 
 import React, { Component } from 'react';
 import Header from './components/header';
-import AddNote from './components/AddNote';
+// import AddNote from './components/AddNote';
 import List from './components/List';
 import './App.css';
+import InputModal from './components/InputModal';
+import UpdateModal from './components/UpdateModal';
+import ReadModal from './components/ReadModal';
 
 export default class App extends Component {
 	constructor(props) {
@@ -16,12 +19,29 @@ export default class App extends Component {
 			id: '',
 			edit: false,
 			read: false,
+			display: false,
 		};
 	}
 
 	handleChange = (e) => {
 		// console.log(e.target.name);
 		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	showModal = () => {
+		this.setState(() => {
+			return {
+				display: true,
+			};
+		});
+	};
+
+	hideModal = () => {
+		this.setState(() => {
+			return {
+				display: false,
+			};
+		});
 	};
 
 	handleSumit = (e) => {
@@ -37,6 +57,7 @@ export default class App extends Component {
 			return {
 				title: '',
 				description: '',
+				display: false,
 			};
 		});
 	};
@@ -56,27 +77,6 @@ export default class App extends Component {
 		}));
 	};
 
-	renderEditForm = () => {
-		// console.log(this.state);
-		return (
-			<>
-				<input
-					type="text"
-					value={this.state.title}
-					name="title"
-					onChange={this.handleChange}
-				></input>
-				<textarea
-					type="text"
-					value={this.state.description}
-					name="description"
-					onChange={this.handleChange}
-				></textarea>
-				<button onClick={this.Update}>update</button>
-			</>
-		);
-	};
-
 	handleUpdate = (id) => {
 		let updateObj = this.state.list.filter((obj) => obj.id === id);
 		// console.log(updateObj[0]);
@@ -85,12 +85,12 @@ export default class App extends Component {
 			title: updateObj[0].title,
 			description: updateObj[0].description,
 			id: updateObj[0].id,
+			display: true,
 		});
 	};
 
-	Update = (e) => {
+	update = (e) => {
 		e.preventDefault();
-		console.log('hi');
 		this.setState((prev) => {
 			return {
 				list: this.state.list.map((obj) => {
@@ -101,6 +101,7 @@ export default class App extends Component {
 					}
 					return obj;
 				}),
+				display: false,
 			};
 		});
 		this.setState({
@@ -112,52 +113,52 @@ export default class App extends Component {
 	};
 
 	close = () => {
-		this.setState({ read: false });
+		this.setState({ read: false, display: false });
 	};
 
 	handleRead = (id) => {
+		let readObj = this.state.list.filter((obj) => obj.id === id);
 		this.setState(() => {
-			return { read: true, id };
+			return {
+				read: true,
+				id: readObj[0].id,
+				display: true,
+				title: readObj[0].title,
+				description: readObj[0].description,
+			};
 		});
 	};
 
-	read = () => {
-		if (this.state.read) {
-			let readObj = this.state.list.filter((obj) => obj.id === this.state.id);
-			console.log(readObj, this.state.read);
-			return (
-				<>
-					<Header title={readObj[0].title} />
-					<p className="desc">{readObj[0].description}</p>
-					<button onClick={this.close}>close</button>
-				</>
-			);
-		}
-	};
-
 	render() {
-		// console.log(this.state.edit);
 		return (
 			<div>
 				<div className="container">
-					{this.state.read && this.read()}
-
-					{this.state.read === false && <Header title="My Notes" />}
-					{this.state.edit && this.renderEditForm()}
-
-					{this.state.edit === false && this.state.read === false && (
-						<AddNote
-							handleChange={this.handleChange}
-							handleSumit={this.handleSumit}
-							handleAddNote={this.handleAddNote}
+					{this.state.read && (
+						<ReadModal
 							title={this.state.title}
 							description={this.state.description}
+							display={this.state.display}
+							close={this.close}
+						/>
+					)}
+
+					{this.state.read === false && (
+						<Header showModal={this.showModal} title="My Notes" />
+					)}
+					{this.state.edit && (
+						<UpdateModal
+							title={this.state.title}
+							handleChange={this.handleChange}
+							description={this.state.description}
+							update={this.update}
+							display={this.state.display}
+							hide={this.hideModal}
 						/>
 					)}
 					<ul>
 						{this.state.list.length > 0 &&
 							this.state.edit === false &&
-							this.state.read === false && <h1>My List</h1>}
+							this.state.read === false}
 						{this.state.edit === false && this.state.read === false && (
 							<List
 								list={this.state.list}
@@ -168,6 +169,17 @@ export default class App extends Component {
 						)}
 					</ul>
 				</div>
+				{this.state.read === false && this.state.edit === false && (
+					<InputModal
+						display={this.state.display}
+						hide={this.hideModal}
+						handleChange={this.handleChange}
+						handleSumit={this.handleSumit}
+						handleAddNote={this.handleAddNote}
+						title={this.state.title}
+						description={this.state.description}
+					/>
+				)}
 			</div>
 		);
 	}

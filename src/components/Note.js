@@ -10,19 +10,19 @@ const Note = (props) => {
 					onClick={(e) => {
 						props.handleRead(props.note.id);
 					}}
-					class="fab fa-readme"
+					className="fab fa-readme"
 				></i>
 				<i
 					onClick={(e) => {
 						props.handleDelete(props.note.id);
 					}}
-					class="fas fa-trash-alt"
+					className="fas fa-trash-alt"
 				></i>
 				<i
 					onClick={(e) => {
 						props.handleUpdate(props.note.id);
 					}}
-					class="far fa-edit"
+					className="far fa-edit"
 				></i>
 			</span>
 			{props.note.title}
