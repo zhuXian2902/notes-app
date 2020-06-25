@@ -8,6 +8,7 @@ import './App.css';
 import InputModal from './components/InputModal';
 import UpdateModal from './components/UpdateModal';
 import ReadModal from './components/ReadModal';
+import Search from './components/Search';
 
 export default class App extends Component {
 	constructor(props) {
@@ -20,6 +21,8 @@ export default class App extends Component {
 			edit: false,
 			read: false,
 			display: false,
+			searchText: '',
+			arr: [],
 		};
 	}
 
@@ -53,7 +56,6 @@ export default class App extends Component {
 		let title = this.state.title.trim();
 		let description = this.state.description.trim();
 		if (title.length === 0) return;
-		if (this.state.list.some((obj) => obj.title === title)) return;
 		let newNote = Object.assign({}, { title, description, id: Date.now() });
 		this.handleAddNote(newNote);
 		this.setState(() => {
@@ -141,9 +143,23 @@ export default class App extends Component {
 		});
 	};
 
+	searchList = (searchText) => {
+		this.setState(() => {
+			return { searchText };
+		});
+		if (searchText.length > 0) {
+			this.state.arr = this.state.list.filter((ele) => {
+				if (ele.title.includes(searchText)) return ele;
+			});
+		} else {
+			this.state.arr = [];
+		}
+	};
+
 	render() {
 		return (
-			<div>
+			<>
+				{this.searchList}
 				<div className="container">
 					{this.state.read && (
 						<ReadModal
@@ -171,19 +187,21 @@ export default class App extends Component {
 						/>
 					)}
 					<ul>
-						{this.state.list.length > 0 &&
+						<Search searchText={this.state.searchText} searchList={this.searchList} />
+						{this.state.arr.length > 0 &&
 							this.state.edit === false &&
-							this.state.read === false}
-						{this.state.edit === false && this.state.read === false && (
-							<List
-								list={this.state.list}
-								handleDelete={this.handleDelete}
-								handleUpdate={this.handleUpdate}
-								handleRead={this.handleRead}
-							/>
-						)}
+							this.state.read === false && (
+								<List list={this.state.arr} handleRead={this.handleRead} />
+							)}
+						{this.state.edit === false &&
+							this.state.read === false &&
+							this.state.searchText.length === 0 && (
+								<List list={this.state.list} handleRead={this.handleRead} />
+							)}
 					</ul>
+					<i onClick={this.showModal} className="fas fa-plus"></i>
 				</div>
+
 				{this.state.read === false && this.state.edit === false && (
 					<InputModal
 						display={this.state.display}
@@ -195,8 +213,7 @@ export default class App extends Component {
 						description={this.state.description}
 					/>
 				)}
-				<i onClick={this.showModal} className="fas fa-plus"></i>
-			</div>
+			</>
 		);
 	}
 }

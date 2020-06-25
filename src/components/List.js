@@ -8,13 +8,7 @@ class List extends React.Component {
 		return (
 			<>
 				{this.props.list.map((note) => (
-					<Note
-						key={note.id}
-						note={note}
-						handleDelete={this.props.handleDelete}
-						handleUpdate={this.props.handleUpdate}
-						handleRead={this.props.handleRead}
-					/>
+					<Note key={note.id} note={note} handleRead={this.props.handleRead} />
 				))}
 			</>
 		);
