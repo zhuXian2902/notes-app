@@ -14,7 +14,24 @@ const ReadModal = (props) => {
 		>
 			<h2>{props.title} </h2>
 			<p className="desc">{props.description}</p>
-			<button onClick={props.close}>close</button>
+
+			<div className="btn-container">
+				<button onClick={props.close}>close</button>
+				<button
+					onClick={(e) => {
+						props.handleUpdate(props.id);
+					}}
+				>
+					update
+				</button>
+				<button
+					onClick={(e) => {
+						props.handleDelete(props.id);
+					}}
+				>
+					delete
+				</button>
+			</div>
 		</Modal>
 	);
 };

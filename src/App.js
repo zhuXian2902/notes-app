@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { Component } from 'react';
-import Header from './components/header';
+import Header from './components/Header';
 // import AddNote from './components/AddNote';
 import List from './components/List';
 import './App.css';
@@ -40,6 +40,9 @@ export default class App extends Component {
 		this.setState(() => {
 			return {
 				display: false,
+				title: '',
+				description: '',
+				id: '',
 			};
 		});
 	};
@@ -74,6 +77,8 @@ export default class App extends Component {
 	handleDelete = (id) => {
 		this.setState((prev) => ({
 			list: prev.list.filter((obj) => id !== obj.id),
+			read: false,
+			display: false,
 		}));
 	};
 
@@ -86,6 +91,7 @@ export default class App extends Component {
 			description: updateObj[0].description,
 			id: updateObj[0].id,
 			display: true,
+			read: false,
 		});
 	};
 
@@ -113,7 +119,13 @@ export default class App extends Component {
 	};
 
 	close = () => {
-		this.setState({ read: false, display: false });
+		this.setState({
+			read: false,
+			display: false,
+			title: '',
+			description: '',
+			id: '',
+		});
 	};
 
 	handleRead = (id) => {
@@ -139,6 +151,9 @@ export default class App extends Component {
 							description={this.state.description}
 							display={this.state.display}
 							close={this.close}
+							handleUpdate={this.handleUpdate}
+							id={this.state.id}
+							handleDelete={this.handleDelete}
 						/>
 					)}
 
@@ -180,6 +195,7 @@ export default class App extends Component {
 						description={this.state.description}
 					/>
 				)}
+				<i onClick={this.showModal} className="fas fa-plus"></i>
 			</div>
 		);
 	}

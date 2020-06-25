@@ -5,10 +5,7 @@ import React from 'react';
 const Header = (props) => {
 	return (
 		<div className="header">
-			<h1>
-				<i onClick={props.showModal} className="fas fa-plus"></i>
-				{props.title}
-			</h1>
+			<h1>{props.title}</h1>
 		</div>
 	);
 };
